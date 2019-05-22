@@ -38,7 +38,6 @@ export type ArrayType = {
   type: AnyTypeKind,
 }
 
-export type TypeCastExpression = { kind: "TypeCast" };
 export type Obj = { kind: "object", members: Array<Property> };
 export type Property = {
   kind: "property",
