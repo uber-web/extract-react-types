@@ -1,0 +1,19 @@
+{
+  "name": "extract-react-types-loader",
+  "version": "0.3.2",
+  "main": "index.js",
+  "repository": "atlassian/extract-react-types",
+  "description": "Load extract-react-types data given a fiile path, using webpack",
+  "license": "MIT",
+  "author": "Ben Conolly",
+  "keywords": [
+    "react",
+    "flow",
+    "typescript",
+    "prop-types",
+    "documentation"
+  ],
+  "dependencies": {
+    "extract-react-types": "^0.17.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "babel-plugin-extract-react-types",
+  "version": "0.1.1",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": "atlassian/extract-react-types",
+  "description": "Plugin to allow pretty-proptypes to more easily pull in component data",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "react",
+    "flow",
+    "typescript",
+    "prop-types",
+    "documentation"
+  ],
+  "author": "Mitchell Hamilton",
+  "dependencies": {
+    "extract-react-types": "^0.17.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-syntax-flow": "^7.2.0",
+    "@babel/plugin-syntax-jsx": "^7.2.0",
+    "@babel/plugin-syntax-typescript": "^7.2.0",
+    "jest-in-case": "^1.0.2"
+  }
+}

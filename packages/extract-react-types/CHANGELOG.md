@@ -1,5 +1,45 @@
 # extract-react-types
 
+## 0.17.0
+### Minor Changes
+
+- [minor] [e682bbb](https://github.com/atlassian/extract-react-types/commit/e682bbb):
+  Changes default export of `extract-react-types` to a named export. See below for changes.
+
+  ```diff
+  -import extractReactTypes from 'extract-react-types';
+  +import { extractReactTypes } from 'extract-react-types';
+  // or in cjs
+  -const extractReactTypes = require('extract-react-types');
+  +const { extractReactTypes } = require('extract-react-types');
+  ```
+
+
+### Patch Changes
+
+- [patch] [4b3b4a4](https://github.com/atlassian/extract-react-types/commit/4b3b4a4):
+  - Add logicalExpression converter
+
+## 0.16.1
+- [patch] [e401ba8](https://github.com/atlassian/extract-react-types/commit/e401ba8):
+  - Add converter for typeCastExpression
+
+- [patch] [6769531](https://github.com/atlassian/extract-react-types/commit/6769531):
+  - Decorators should work again
+  - Allow default props to be missing
+  - Return correct names for nested properties in an object
+  - Add `key` field to arrays (missing previously)
+
+## 0.16.0
+- [minor] [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
+  - Add findExportedComponents function
+
+- [minor] [8f04dad](https://github.com/atlassian/extract-react-types/commit/8f04dad):
+  - Add name to function components like class components
+
+- [minor] [6bc521c](https://github.com/atlassian/extract-react-types/commit/6bc521c):
+  - Support memo, forwardRef and function expressions
+
 ## 0.15.1
 
 - **bug fix** We were calling `convert` in our initial function setup. We have switched to using nodes instead so we do not run convert on all assignment expressions.
