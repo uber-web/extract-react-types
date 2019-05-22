@@ -484,12 +484,6 @@ converters.MemberExpression = (path, context) /*: K.MemberExpression*/ => {
   };
 };
 
-converters.TypeCastExpression = (path, context) /*: K.TypeCastExpression*/ => {
-  return {
-    kind: 'TypeCast'
-  };
-};
-
 function isTsIdentifier(path) {
   if (
     ['TSExpressionWithTypeArguments', 'TSTypeReference'].indexOf(path.parentPath.type) !== -1 &&
