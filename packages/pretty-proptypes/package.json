@@ -1,0 +1,43 @@
+{
+  "name": "pretty-proptypes",
+  "version": "0.6.1",
+  "description": "prettily render prop types from react components",
+  "repository": "atlassian/extract-react-types",
+  "main": "dist/pretty-proptypes.cjs.js",
+  "module": "dist/pretty-proptypes.esm.js",
+  "keywords": [
+    "extract-react-types",
+    "react",
+    "props",
+    "documentation"
+  ],
+  "author": "Ben Conolly",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.4.4",
+    "emotion": "^9.1.1",
+    "kind2string": "^0.5.4",
+    "react-markings": "^1.2.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-emotion": "^9.1.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "extract-react-types": "^0.17.0",
+    "jsdom": "^11.7.0",
+    "react": "^16.3.1",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.3.1"
+  }
+}

@@ -1,5 +1,4 @@
 // @flow
-'use strict';
 
 /*::
 type TestCase = {
@@ -11,8 +10,9 @@ type TestCase = {
 }
 */
 
-const extractReactTypes = require('./');
-const stripIndent = require('strip-indent');
+import stripIndent from 'strip-indent';
+import cases from 'jest-in-case';
+import { extractReactTypes } from './src';
 
 const TESTS = [
   {
@@ -21,6 +21,41 @@ const TESTS = [
     code: `
     class Component extends React.Component<{ foo: boolean }> {
       // ...
+    }
+  `
+  },
+  {
+    name: 'LogicalExpression and',
+    typeSystem: 'flow',
+    code: `
+    class Button extends React.Component<{ and: string }> {
+      static defaultProps = {
+        and: true && 'something',
+      }
+    }
+    
+  `
+  },
+  {
+    name: 'LogicalExpression or',
+    typeSystem: 'flow',
+    code: `
+    class Button extends React.Component<{ or: string }> {
+      static defaultProps = {
+        or: 'me' || 'you',
+      }
+    }
+    
+  `
+  },
+  {
+    name: 'LogicalExpression or complicated',
+    typeSystem: 'flow',
+    code: `
+    class Button extends React.Component<{ or: string }> {
+      static defaultProps = {
+        or: 'me' || 'you' || 'someone else' && 'impossible state',
+      }
     }
   `
   },
@@ -371,6 +406,68 @@ const TESTS = [
     class Component extends React.Component<Props> {
 
     }
+  `
+  },
+  {
+    name: 'ts custom prop',
+    typeSystem: 'typescript',
+    code: `
+    interface BadgeProps {
+      texture: string;
+    }
+    
+    function Badge({ texture }: BadgeProps) {}
+    
+    Badge.f = [];
+
+    export default Badge;
+  `
+  },
+  {
+    name: 'ts nested prop',
+    typeSystem: 'typescript',
+    code: `
+    interface BadgeProps {
+      texture: Texture["src"];
+    }
+    
+    function Badge({ texture }: BadgeProps) {}
+
+    export default Badge;
+  `
+  },
+  {
+    name: 'ts array prop',
+    typeSystem: 'typescript',
+    code: `
+    interface ScheduleProps {
+      intervals: Array<{
+        begin: Interval["begin"];
+        end: Interval["end"];
+      }>;
+    }
+
+    function Schedule({ intervals }: ScheduleProps) {}
+
+    export default Schedule;
+  `
+  },
+  {
+    name: 'ts decorators',
+    typeSystem: 'typescript',
+    code: `
+    @ObjectType()
+    export class Theme extends React.Component<{}, {}> {
+      @Field(_ => ID)
+      public id!: string;
+    
+      @Field(_ => Textures)
+      public fonts!: Textures;
+
+      render() {}
+    }
+
+    export default Theme;
   `
   },
   {
@@ -1202,7 +1299,7 @@ const TESTS = [
 
       class Component extends React.Component<{ foo: string[] }> {}
 
-      function Component(props: Props) {
+      function FunComponent(props: Props) {
         return null;
       }
 
@@ -1323,24 +1420,181 @@ const TESTS = [
     };
     export default Field;
     `
+  },
+  {
+    name: 'flow forwardRef',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = forwardRef((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+
+    
+    `
+  },
+  {
+    name: 'flow React.forwardRef',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = React.forwardRef((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow function expression',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = function(props: Props) {
+
+    }
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow React.memo',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = memo((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow memo',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = React.memo((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow func that is not valid',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = something((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow memo wrapping forwardRef',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = memo(forwardRef((props: Props, ref) => {
+
+    }))
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow forwardRef default export',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    export default forwardRef((props: Props, ref) => {
+
+    })
+    `
+  },
+  {
+    name: 'flow memo default export',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    export default memo((props: Props, ref) => {
+
+    })
+    `
+  },
+  {
+    name: 'flow memo wrapping forwardRef default export',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    export default memo(forwardRef((props: Props, ref) => {
+
+    }))
+    `
+  },
+  {
+    name: 'Flow TypeCastExpression',
+    typeSystem: 'flow',
+    code: `
+    type Props = { bar: string }
+  
+    class Component extends React.Component<Props> {
+      static defaultProps = {
+        bar: (ascii: string),
+      }
+    }
+    `
   }
 ];
 
-for (let testCase /*: TestCase */ of TESTS) {
-  let testFn;
-
-  if (testCase.only) {
-    testFn = test.only;
-  } else if (testCase.skip) {
-    testFn = test.skip;
-  } else {
-    testFn = test;
-  }
-
-  testFn(testCase.name, () => {
+cases(
+  '',
+  testCase => {
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
     let result = extractReactTypes(code, testCase.typeSystem, __filename);
     expect(result).toMatchSnapshot();
-  });
-}
+  },
+  TESTS
+);
