@@ -1202,7 +1202,7 @@ const TESTS = [
 
       class Component extends React.Component<{ foo: string[] }> {}
 
-      function Component(props: Props) {
+      function FunComponent(props: Props) {
         return null;
       }
 
