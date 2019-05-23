@@ -1,7 +1,7 @@
 // @flow
 
 const path = require('path');
-const { extractReactTypes } = require('extract-react-types');
+const { extractReactTypes } = require('@uber-web-ui/extract-react-types');
 
 const devProps = {
   component: {
@@ -33,7 +33,7 @@ eg:
   }
 };
 
-module.exports = function extractReactTypesLoader(content /* : string */) {
+module.exports = function extractReactTypesLoader(content /*: string */) {
   if (
     !['staging', 'production'].includes(process.env.WEBSITE_ENV) &&
     !process.env.FORCE_EXTRACT_REACT_TYPES
