@@ -1,6 +1,8 @@
 {
-  "name": "extract-react-types-mono-repo",
-  "version": "0.0.0",
+  "name": "@uber-web-ui/extract-react-types",
+  "version": "1.0.0",
+  "repository": "uber-web/extract-react-types",
+  "author": "James Kyle <me@thejameskyle.com>",
   "license": "MIT",
   "scripts": {
     "test": "jest",
