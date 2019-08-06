@@ -1407,6 +1407,11 @@ function convertMethodCall(path, context): K.Func {
   };
 }
 
+function shouldIncludeComment(comment) {
+  const excludePatterns = [/\s*eslint/];
+  return !excludePatterns.find(pattern => comment.value.match(pattern));
+}
+
 function mapComment(comment) {
   return {
     type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',
@@ -1419,7 +1424,7 @@ function attachCommentProperty(source, dest, name) {
   if (!source || !source[name]) return;
   if (!dest[name]) dest[name] = [];
 
-  let comments = source[name].map(mapComment);
+  let comments = source[name].filter(shouldIncludeComment).map(mapComment);
   dest[name] = dest[name].concat(comments);
 }
 
